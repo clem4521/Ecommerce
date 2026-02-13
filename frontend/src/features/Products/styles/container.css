@@ -1,0 +1,10 @@
+.contain{
+  height:200px;
+  position:relative;
+  border:solid green 1px;
+  cursor:pointer;
+}
+.text{
+  position:absolute;
+  bottom:5px;
+}

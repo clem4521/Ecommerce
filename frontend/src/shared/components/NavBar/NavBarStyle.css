@@ -1,0 +1,21 @@
+nav{
+  height:40px;
+  padding:5px;
+}
+.red{
+  background-color:red;
+}
+.white{
+  background-color:white;
+}
+.flex-container{
+  display:flex;
+}
+.position-absolute{
+  position:absolute;
+}
+.center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
