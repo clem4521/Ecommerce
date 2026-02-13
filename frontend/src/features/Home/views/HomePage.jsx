@@ -8,9 +8,7 @@ function HomePage(){
         <NavBar/>
       </header>
       <main className="red">
-        <div className="container">
-          <ProductsGrid/>
-        </div>
+      
         <footer>end</footer>
       </main>
     </>
