@@ -5,10 +5,14 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 function NavBar(){
   return(
     <nav className="">
-      <div className="flex-container">
-        <h1 className="font-lg font-sans-serif ">Eseller</h1>
-        <div className="center">
+      <div class="box">
+        <h1 className="font-sans-serif">Eseller</h1>
+        <div className="searchbox">
           <SearchBar/>
+        </div>
+        <div class="auth-box">
+          <button class="login-btn font-sm">Login</button>
+          <button class="register-btn font-sm">Register</button>
         </div>
       </div>
     </nav>
