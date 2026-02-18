@@ -1,6 +1,8 @@
+import {NavLink} from "react-router";
+import SearchBar from "../SearchBar/SearchBar.jsx";
 import "../../style/fonts.css";
 import "./NavBarStyle.css";
-import SearchBar from "../SearchBar/SearchBar.jsx";
+
 
 function NavBar(){
   return(
@@ -11,8 +13,13 @@ function NavBar(){
           <SearchBar/>
         </div>
         <div class="auth-box">
-          <button class="login-btn font-sm">Login</button>
-          <button class="register-btn font-sm">Register</button>
+          <NavLink to="/auth/login" end>
+            <button class="login-btn font-sm">Login</button>
+          </NavLink>
+            
+          <NavLink to="/auth/register" end>
+            <button class="register-btn font-sm">Register</button>
+          </NavLink>
         </div>
       </div>
     </nav>
