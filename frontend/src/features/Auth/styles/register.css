@@ -26,9 +26,6 @@
 .register-inputs{
   height:40px;
   font-size:18px;
-}
-
-.register-inputs::placeholder{
   padding-left:5px;
 }
 
