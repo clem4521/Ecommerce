@@ -1,58 +1,38 @@
+import {useEffect,useState} from "react";
+import {Link} from "react-router";
+import axios from "axios";
 import ProductContainer from "./ProductContainer.jsx";
 import "../styles/grid.css";
 function ProductsGrid(){
+
+  const [products,setProducts] = useState([]);
+  
+  const instance = axios.create({
+    baseURL:"http://localhost:8080"
+  });
+  
+  useEffect(()=>{
+    instance.get("/api/products")
+      .then((response)=>{
+        setProducts(response.data);
+        console.log(response.data);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+  },[]);
+
   return (
-    <div className="box">
-      <div className="grid">
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-        <ProductContainer name="Soccer Ball" price="30"/>
-      </div>
+    <div className="grid">
+      
+      {products.map((product)=>(
+        <Link to={`/products/${product.id}`}>
+          <div className="">
+            <ProductContainer name={product.name} price={product.price}/>
+          </div>
+        </Link>
+      ))}
+      
     </div>
   )
 }

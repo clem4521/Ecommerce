@@ -5,15 +5,20 @@
   padding:0px;
 }
 header{
-  height:50px;
+  height:60px;
 }
 main{
   height: 100hv;
   position:relative;
+  padding-top:10px;
+  padding-bottom:10px;
 }
 footer{
   background-color:black;
   color:white;
+  bottom:0px;
+  position:relative;
+  width:100%;
 }
 .container{
   padding:10px;
@@ -22,4 +27,9 @@ footer{
 
 .red{
   background-color:red;
+}
+.heading{
+  padding-left:10px;
+  padding-top:10px;
+  padding-bottom:10px;
 }
