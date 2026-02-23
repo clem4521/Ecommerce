@@ -1,6 +1,5 @@
-import express from "express";
+import type {Request,Response} from "express";
 import db from "../config/mysqlConfig.ts";
-const {Request,Response} = express;
 
 export async function getProducts(req:Request,res:Response){
 	const tableQuery = `CREATE TABLE IF NOT EXISTS 
@@ -36,11 +35,11 @@ export async function addProduct(req:Request,res:Response){
 		products(name,price)
 		VALUES (?,?)
 	`;
-	const {name,price} = req.body;
+	const {name,price} = req.body||undefined;
 	try{
-		await db.query(insertValue,[name,price],(error,results)=>{
-			console.log(results);
-	  });
+		const [results] = await db.query(insertValue,[name,price]);
+		console.log(results)
+		await db.destroy();
 	}catch(error){
 		console.log(error);
 	}
@@ -55,10 +54,14 @@ export async function getProduct(req:Request,res:Response){
 	
 	try{
 		const [results] = await db.query(getProductquery,[productId]);
-		console.log(results);
+		
 	}catch(error){
 		console.log(error);
 	}
+	db.end();
+	return res.json({
+		status:200
+	});
 	
 }
 

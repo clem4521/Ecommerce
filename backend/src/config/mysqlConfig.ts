@@ -5,9 +5,10 @@ dotenv.config();
 
 const db = await mysql.createConnection({
   host:process.env.HOST,
-  user:process.env.USERNAME,
-  password:process.env.PASSWORD,
-  database:process.env.DB
+  user:"root",
+  password:"4521",
+  database:process.env.DB,
+  port:3306
 });
 
 export default db;
