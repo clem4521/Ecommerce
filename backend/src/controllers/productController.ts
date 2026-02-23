@@ -47,3 +47,18 @@ export async function addProduct(req:Request,res:Response){
 	
 	console.log(name,price);
 }
+
+export async function getProduct(req:Request,res:Response){
+	const getProductquery = `SELECT * FROM products WHERE id = ?`
+	
+	const productId = req.params.id;
+	
+	try{
+		const [results] = await db.query(getProductquery,[productId]);
+		console.log(results);
+	}catch(error){
+		console.log(error);
+	}
+	
+}
+
