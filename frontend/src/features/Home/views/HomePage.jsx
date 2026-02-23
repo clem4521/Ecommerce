@@ -7,10 +7,17 @@ function HomePage(){
       <header className="">
         <NavBar/>
       </header>
-      <main className="red">
+      <main className="">
+        <section>
+          <h2 className="font-sans-serif heading ">Discounts</h2>
+        </section>
       
-        <footer>end</footer>
+        <section>
+          <h2 className="font-sans-serif heading ">All Products</h2>
+          <ProductsGrid/>
+        </section>
       </main>
+      <footer>end</footer>
     </>
   );
 }
