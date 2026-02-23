@@ -2,7 +2,7 @@ import "./SearchBarStyle.css";
 import search from "../../assets/search.svg";
 function SearchBar(){
   return(
-    <div class="search-container">
+    <div className="search-container">
       <button className="search-button">
         <img src={search} alt="search"/>
       </button>
