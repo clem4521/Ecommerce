@@ -23,6 +23,7 @@ export async function getUsers(req:Request,res:Response){
     } catch (error:any) {
         if(error.code == 'ER_NO_SUCH_TABLE'){
             const [results] = await db.query(createUsersTableQuery);
+            res.json({message:"Users table was created"})
             console.log(results);
         }
     }
@@ -41,7 +42,29 @@ export async function register(req:Request,res:Response){
                 message:"User was create"
             });
         });
-    });
+    });    
+}
 
-    
+export async function login(req:Request,res:Response){
+    const loginQuery = "SELECT email,password FROM users WHERE email = ?";
+    const {email,password} = req.body;
+
+    try{
+        const [results] = await db.query(loginQuery,[email]);
+
+        //@ts-expect-error
+        const userPasswordCrypt = results[0].password;
+        const match = await bcrypt.compare(password,userPasswordCrypt);
+
+        if(match){
+            return res.status(200).json({message:"successful"});
+        }else{
+            return res.json({message:"Unsuccessful"});
+        }
+        
+    }catch(error){
+        console.log(error)
+        res.json({message:"There was an error"})
+    }
+
 }
