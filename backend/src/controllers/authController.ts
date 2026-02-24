@@ -64,7 +64,7 @@ export async function login(req:Request,res:Response){
         
     }catch(error){
         console.log(error)
-        res.json({message:"There was an error"})
+        res.status(404).json({message:"There was an error"})
     }
 
 }
