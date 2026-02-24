@@ -47,6 +47,8 @@
   border-style:none;
   font-size:14px;
 }
-
+.register-btn-2:hover{
+  background-color: gainsboro;
+}
 
 
