@@ -1,4 +1,4 @@
-import {NavLink} from "react-router";
+import {Link, NavLink} from "react-router";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 
 function NavBar(){
@@ -11,8 +11,12 @@ function NavBar(){
             <SearchBar/>
           </div>
           <div className="absolute right-5 flex flex-row gap-2">
-            <button className="bg-[#3BBEDB] text-white font-semibold w-18 h-8 rounded-2xl">login</button>
-            <button className="bg-[#3BBEDB] text-white font-semibold w-18 h-8 rounded-2xl">register</button>
+            <Link to={"/auth/login"}>
+               <button className="bg-[#3BBEDB] text-white font-semibold w-18 h-8 rounded-2xl">login</button>
+            </Link>
+            <Link to={"/auth/register"}>
+              <button className="bg-[#3BBEDB] text-white font-semibold w-18 h-8 rounded-2xl">register</button>
+            </Link>
           </div>
         </div>
       </nav>
