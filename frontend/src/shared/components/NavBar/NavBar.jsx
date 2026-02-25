@@ -6,7 +6,7 @@ function NavBar(){
     <header className="h-12 relative">
       <nav className="w-full h-10 top-1 absolute">
         <div className="h-8 w-full absolute top-1 p-0 m-0 flex flex-row">
-          <h1 className="text-3xl absolute">Eseller</h1>
+          <h1 className="text-3xl absolute bottom-2">Eseller</h1>
           <div className="absolute w-full flex justify-center items-center">
             <SearchBar/>
           </div>
