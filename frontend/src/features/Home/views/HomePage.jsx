@@ -1,12 +1,11 @@
-import "../styles/HomeStyle.css";
 import NavBar from "../../../shared/components/NavBar/NavBar.jsx";
 import ProductsGrid from "../../Products/components/ProductsGrid.jsx";
+import "../../../app/styles/App.css";
+
 function HomePage(){
   return(
-    <>
-      <header className="">
-        <NavBar/>
-      </header>
+    <>  
+      <NavBar/>
       <main className="">
         <section>
           <h2 className="font-sans-serif heading ">Discounts</h2>

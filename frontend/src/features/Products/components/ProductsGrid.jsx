@@ -2,7 +2,6 @@ import {useEffect,useState} from "react";
 import {Link} from "react-router";
 import axios from "axios";
 import ProductContainer from "./ProductContainer.jsx";
-import "../styles/grid.css";
 function ProductsGrid(){
 
   const [products,setProducts] = useState([]);

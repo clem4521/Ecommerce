@@ -1,6 +1,5 @@
 import axios from "axios"
-import "../styles/register.css"
-import "../../../shared/style/fonts.css";
+
 function RegisterPage(){
   const instance = axios.create({
     baseURL:"http://localhost:8080"

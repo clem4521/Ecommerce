@@ -1,5 +1,3 @@
-import "../styles/container.css";
-
 function ProductContainer(props){
   return (
     <div className="contain">

@@ -1,7 +1,6 @@
 import {NavLink} from "react-router";
 import axios from "axios";
-import "../styles/login.css";
-import "../../../shared/style/fonts.css";
+
 function LoginPage(){
   const instance = axios.create({
     baseURL:"http://localhost:8080"
