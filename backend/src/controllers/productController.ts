@@ -10,22 +10,18 @@ export async function getProducts(req:Request,res:Response){
 	  )
 	`;
 	
-	const getProductQuery="SELECT * FROM products";
-	
-	try{
-		const [results] = await db.query(tableQuery);
-		console.log(results);
-	}catch(error){
-		console.log(error);
-	}
-	
-	
+	const getProductQuery= "SELECT * FROM products";
+
 	try{
 		const [results] = await db.query(getProductQuery);
 		console.log(results);
 		res.json(results)
-	}catch(error){
-		console.log(error);
+	}catch(error:any){
+	 	if(error.code == 'ER_NO_SUCH_TABLE'){
+			const [results] = await db.query(tableQuery);
+	 		console.log(results);
+			return res.json(results);
+		}
 	}
 }
 
@@ -35,15 +31,14 @@ export async function addProduct(req:Request,res:Response){
 		products(name,price)
 		VALUES (?,?)
 	`;
-	const {name,price} = req.body||undefined;
+	const {name,price} = req.body;
 	try{
 		const [results] = await db.query(insertValue,[name,price]);
 		console.log(results)
-		await db.destroy();
+		res.status(200).json({ message: "Data received successfully" });
 	}catch(error){
 		console.log(error);
 	}
-	
 	console.log(name,price);
 }
 
@@ -54,14 +49,13 @@ export async function getProduct(req:Request,res:Response){
 	
 	try{
 		const [results] = await db.query(getProductquery,[productId]);
+		return res.json({
+		status:200,
+		results
+	});
 		
 	}catch(error){
 		console.log(error);
 	}
-	db.end();
-	return res.json({
-		status:200
-	});
-	
 }
 
