@@ -1,6 +1,0 @@
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,max(350px));
-  gap:10px;
-  padding-left:55px;
-}
