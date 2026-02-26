@@ -26,8 +26,8 @@ function LoginPage(){
         <div className="flex flex-col justify-center items-center mt-2">
           <h2 className="text-3xl font-semibold">Login</h2>
           <div className="flex flex-col mt-5 gap-5">
-            <input className="h-8 w-[20vw] border" placeholder="Email" id="emailValue"/>
-            <input className="h-8 w-[20vw] border" placeholder="Password" type="password" id="passwordValue"/> 
+            <input className="h-8 w-[20vw] border rounded-2xl pl-2" placeholder="Email" id="emailValue"/>
+            <input className="h-8 w-[20vw] border rounded-2xl pl-2" placeholder="Password" type="password" id="passwordValue"/> 
           </div>
           <div className="mt-5">
             <NavLink to="/auth/register" end>
@@ -36,7 +36,7 @@ function LoginPage(){
             <p className="mt-3 cursor-default ml-4">Forgot password</p>
           </div>
           <div className="mt-3">
-            <button className="bg-gray-200 w-[5vw] h-[5vh] rounded-3xl hover:bg-gray-400 hover:text-white" onClick={login}>Login</button>
+            <button className="bg-gray-200 w-[5vw] h-[5vh] rounded-3xl hover:bg-gray-400 hover:text-white" onClick={login}>Log In</button>
           </div>
         </div>
       </div>

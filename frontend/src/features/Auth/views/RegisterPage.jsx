@@ -24,24 +24,24 @@ function RegisterPage(){
   
 
   return(
-  <>
-    <div className="outer-container">
-      <div className="inner-container">
-        <div>
-          <h2 className="register-heading font-sans-serif">Register</h2>
+  <main className="flex justify-center items-center">
+    <div className="border-2 border-gray-300 w-[35vw] relative top-10 rounded-2xl">
+      <div className="flex flex-col gap-5 justify-center items-center">
+        <h2 className="text-2xl font-semibold">Register</h2>
+        <div className="flex flex-row gap-3">
+          <input className="border h-[5vh] rounded-2xl pl-2" placeholder="First Name" id="firstNameValue"/>
+          <input className="border h-[5vh] rounded-2xl pl-2" placeholder="Last Name" id="lastNameField"/>
         </div>
-        <div className="name-container">
-          <input className="register-inputs" placeholder="First Name" id="firstNameValue"/>
-          <input className="register-inputs" placeholder="Last Name" id="lastNameField"/>
-        </div>
-        <input className="register-inputs" placeholder="Email" id="emailValue"/>
-        <input className="register-inputs" placeholder="Password" type="password" id="passwordValue"/>
-        <div className="register-btn-2-div">
-          <button className="register-btn-2"onClick={postNewUser} >Register</button>
+        <input className="w-[29.5vw] h-[5vh] rounded-2xl pl-2 border" placeholder="Email" id="emailValue"/>
+        <input className="w-[29.5vw] h-[5vh] rounded-2xl pl-2 border" placeholder="Password" type="password" id="passwordValue"/>
+        <div className="">
+          <button className="relative pl-3 bg-gray-200 w-[5vw] h-[5vh] rounded-3xl hover:bg-gray-400 hover:text-white"onClick={postNewUser}>
+            <p className="absolute bottom-1.5 right-2">Sign In</p>
+          </button>
         </div>
       </div>
     </div>
-  </>
+  </main>
   )
 }
 
