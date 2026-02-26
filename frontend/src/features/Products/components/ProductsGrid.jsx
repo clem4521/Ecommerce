@@ -2,7 +2,6 @@ import {useEffect,useState} from "react";
 import {Link} from "react-router";
 import axios from "axios";
 import ProductContainer from "./ProductContainer.jsx";
-import "../styles/grid.css";
 function ProductsGrid(){
 
   const [products,setProducts] = useState([]);
@@ -23,8 +22,7 @@ function ProductsGrid(){
   },[]);
 
   return (
-    <div className="grid">
-      
+    <div className="border border-red-500 flex flex-row flex-wrap gap-5 pl-24">
       {products.map((product)=>(
         <Link to={`/products/${product.id}`}>
           <div className="">
