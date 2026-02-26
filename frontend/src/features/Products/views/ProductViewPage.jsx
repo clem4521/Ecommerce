@@ -3,9 +3,9 @@ import {useParams} from "react-router";
 import axios from "axios";
 function ProductViewPage(){
   let {productId} = useParams();
-  
-  const [name,setName]= useState("");
-  const [price,setPrice]= useState(0);
+  const [price,setPrice] = useState(0);
+  const [name,setName] = useState("");
+  console.log(productId);
   
   const instance = axios.create({
     baseURL:"http://localhost:8080"
@@ -14,9 +14,9 @@ function ProductViewPage(){
   useEffect(()=>{
     instance.get(`/api/products/${productId}`)
       .then(function(response){
-        console.log(response);
-        setPrice(response.price);
-        setName(response.name);
+        console.log(response.data.results[0].price);
+        setPrice(response.data.results[0].price);
+        setName(response.data.results[0].name);
       })
     .catch((error)=>{
         console.log(error);
