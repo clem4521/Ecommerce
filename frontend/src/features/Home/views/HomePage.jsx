@@ -6,17 +6,17 @@ function HomePage(){
   return(
     <>  
       <NavBar/>
-      <main className="">
+      <main className="relative">
         <section>
-          <h2 className="font-sans-serif heading ">Discounts</h2>
+          <h2 className="cursor-default">Discounts</h2>
         </section>
       
         <section>
-          <h2 className="font-sans-serif heading ">All Products</h2>
+          <h2 className="text-2xl mb-2 cursor-default">All Products</h2>
           <ProductsGrid/>
         </section>
       </main>
-      <footer>end</footer>
+      <footer className="relative bottom-0 w-full bg-black text-white mt-5">end</footer>
     </>
   );
 }
