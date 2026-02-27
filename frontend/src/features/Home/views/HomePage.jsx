@@ -1,6 +1,7 @@
 import NavBar from "../../../shared/components/NavBar/NavBar.jsx";
 import ProductsGrid from "../../Products/components/ProductsGrid.jsx";
 import "../../../app/styles/App.css";
+import { Link } from "react-router";
 
 function HomePage(){
   return(
@@ -8,7 +9,9 @@ function HomePage(){
       <NavBar/>
       <main className="relative">
         <section>
-          <h2 className="cursor-default">Discounts</h2>
+          <Link to="/">
+            <h2 className="cursor-default">Discounts</h2>
+          </Link>
         </section>
       
         <section>
