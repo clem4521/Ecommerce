@@ -59,3 +59,12 @@ export async function getProduct(req:Request,res:Response){
 	}
 }
 
+export async function deleteProduct(req:Request,res:Response){
+	const id = req.params.id;
+	const deleteProductQuery = "DELETE FROM products WHERE id=?";
+
+	const [results] = await db.query(deleteProductQuery,[id]);
+
+	res.status(200).json({message:"product has been delete"});
+}
+
