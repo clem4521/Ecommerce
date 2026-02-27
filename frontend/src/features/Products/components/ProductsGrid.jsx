@@ -26,7 +26,7 @@ function ProductsGrid(){
       {products.map((product)=>(
         <Link to={`/products/${product.id}`}>
           <div className="">
-            <ProductContainer name={product.name} price={product.price}/>
+            <ProductContainer name={product.name.charAt(0).toUpperCase()+product.name.slice(1)} price={product.price}/>
           </div>
         </Link>
       ))}
