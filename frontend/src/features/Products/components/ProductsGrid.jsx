@@ -22,7 +22,7 @@ function ProductsGrid(){
   },[]);
 
   return (
-    <div className="flex flex-row flex-wrap gap-5 pl-24">
+    <div className="flex flex-row flex-wrap gap-5 pl-24 mb-10">
       {products.map((product)=>(
         <Link to={`/products/${product.id}`}>
           <div className="">

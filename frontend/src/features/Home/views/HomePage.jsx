@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 function HomePage(){
   return(
-    <>  
+    <div className="relative flex flex-col min-h-screen">  
       <NavBar/>
       <main className="relative">
         <section>
@@ -17,8 +17,8 @@ function HomePage(){
           <ProductsGrid/>
         </section>
       </main>
-      <footer className="relative bottom-0 w-full bg-black text-white mt-5">end</footer>
-    </>
+      <footer className="flex-[0_0_50px] bottom-0 w-full bg-black text-white mt-auto">end</footer>
+    </div>
   );
 }
 export default HomePage;
