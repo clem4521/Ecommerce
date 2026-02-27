@@ -9,9 +9,7 @@ function HomePage(){
       <NavBar/>
       <main className="relative">
         <section>
-          <Link to="/">
-            <h2 className="cursor-default">Discounts</h2>
-          </Link>
+           <h2 className="cursor-default">Discounts</h2>
         </section>
       
         <section>
