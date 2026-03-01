@@ -38,8 +38,14 @@ function NavBar(){
               <button className="bg-[#3BBEDB] text-white font-semibold w-18 h-8 rounded-2xl">register</button>
             </Link>
           </div>
-          <div className={`${auth?'block':'hidden'} absolute right-5`}>
+          <div className={`${auth?'block':'hidden'} absolute right-5 flex flex-row gap-5`}>
+            
+            <div>
+              <img src={person}/>
+              <p></p>
+            </div>
             <img src={shopping_cart} alt="shopping cart"/>
+            <img src={setting} />
           </div>
         </div>
       </nav>

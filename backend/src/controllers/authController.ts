@@ -54,7 +54,7 @@ export async function register(req:Request,res:Response){
 }
 
 export async function login(req:Request,res:Response){
-    const loginQuery = "SELECT email,password FROM users WHERE email = ?";
+    const loginQuery = "SELECT email,password,first_name FROM users WHERE email = ?";
     const {email,password} = req.body;
     const cookies = req.cookies;
     const token:string = cookies.token;
@@ -68,18 +68,19 @@ export async function login(req:Request,res:Response){
     }   
     try{
         const [results] = await db.query(loginQuery,[email]);
-
+        //@ts-expect-error
+        const name = results[0].first_name;
         //@ts-expect-error
         const userPasswordCrypt = results[0].password;
         const match = await bcrypt.compare(password,userPasswordCrypt);
         if(match){
-            const token:string = jws.sign({email,password},secretKey,{expiresIn:"2d"});
+            const token:string = jws.sign({email,password,name},secretKey,{expiresIn:"2d"});
             res.cookie("token",token,{
                 httpOnly: true,
                 secure: false,      // true ONLY if using HTTPS
                 sameSite: "lax",
             });
-            return res.status(200).json({message:"successful"});
+            return res.status(200).json({message:"successful",name:name});
         }else{
             return res.json({message:"Password incorrect"});
         }
@@ -94,7 +95,6 @@ export async function login(req:Request,res:Response){
 export function isAuthenticate(req:Request,res:Response){
     const cookies = req.cookies;
     const token:string = cookies.token;
-    console.log(req.cookies);
     
     try{
         if(token == undefined){
