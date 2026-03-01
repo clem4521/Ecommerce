@@ -14,7 +14,6 @@ function ProductsGrid(){
     instance.get("/api/products")
       .then((response)=>{
         setProducts(response.data);
-        console.log(response.data);
       })
       .catch((error)=>{
         console.log(error);
