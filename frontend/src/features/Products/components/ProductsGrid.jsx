@@ -14,7 +14,6 @@ function ProductsGrid(){
     instance.get("/api/products")
       .then((response)=>{
         setProducts(response.data);
-        console.log(response.data);
       })
       .catch((error)=>{
         console.log(error);
@@ -22,11 +21,11 @@ function ProductsGrid(){
   },[]);
 
   return (
-    <div className="flex flex-row flex-wrap gap-5 pl-24">
+    <div className="flex flex-row flex-wrap gap-5 pl-24 mb-10">
       {products.map((product)=>(
         <Link to={`/products/${product.id}`}>
           <div className="">
-            <ProductContainer name={product.name} price={product.price}/>
+            <ProductContainer name={product.name.charAt(0).toUpperCase()+product.name.slice(1)} price={product.price}/>
           </div>
         </Link>
       ))}

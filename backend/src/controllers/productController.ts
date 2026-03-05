@@ -14,7 +14,6 @@ export async function getProducts(req:Request,res:Response){
 
 	try{
 		const [results] = await db.query(getProductQuery);
-		console.log(results);
 		res.json(results)
 	}catch(error:any){
 	 	if(error.code == 'ER_NO_SUCH_TABLE'){
@@ -34,12 +33,10 @@ export async function addProduct(req:Request,res:Response){
 	const {name,price} = req.body;
 	try{
 		const [results] = await db.query(insertValue,[name,price]);
-		console.log(results)
 		res.status(200).json({ message: "Data received successfully" });
 	}catch(error){
 		console.log(error);
 	}
-	console.log(name,price);
 }
 
 export async function getProduct(req:Request,res:Response){
@@ -57,5 +54,14 @@ export async function getProduct(req:Request,res:Response){
 	}catch(error){
 		console.log(error);
 	}
+}
+
+export async function deleteProduct(req:Request,res:Response){
+	const id = req.params.id;
+	const deleteProductQuery = "DELETE FROM products WHERE id=?";
+
+	const [results] = await db.query(deleteProductQuery,[id]);
+
+	res.status(200).json({message:"product has been delete"});
 }
 

@@ -1,23 +1,42 @@
-import {NavLink} from "react-router";
+import {NavLink,useNavigate} from "react-router";
 import axios from "axios";
 
 function LoginPage(){
+  let navigate = useNavigate()
   const instance = axios.create({
-    baseURL:"http://localhost:8080"
+    baseURL:"http://localhost:8080",
   });
+  instance.defaults.withCredentials = true;
+
   async function login(){
     let emailField = document.getElementById("emailValue")?.value;
     let passwordField = document.getElementById("passwordValue")?.value;
     console.log(emailField,passwordField);
     try {
-      await instance.post("/api/auth/login",{
+      instance.post("/api/auth/login",{
         email:emailField,
         password:passwordField
+      },{
+        withCredentials:true,
       }).then((response)=>{
           console.log(response)
+          if(response.data.message == "successful"){
+            navigate(-1);
+          }
       });
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  function logout(){
+    try {
+      instance.delete("/api/auth/logout")
+        .then((response)=>{
+          console.log(response)
+        })
+    } catch (error) {
+      console.log(error)
     }
   }
   return(
