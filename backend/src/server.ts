@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import productRouter from "./routes/productRouter.ts";
 import authRouter from "./routes/authRouter.ts";
 import type { Request,Response } from "express";
-import { Session } from "node:inspector";
+import cartRouter from "./routes/cartRouter.ts";
 const server = express();
 
 server.use(express.json());
@@ -21,6 +21,7 @@ server.use(cors({
 
 server.use("/api",productRouter);
 server.use("/api",authRouter);
+server.use("/api",cartRouter)
 
 server.get("/test",(req:Request,res:Response)=>{
   res.json(req.cookies);

@@ -7,11 +7,15 @@ function ProductViewPage(){
   let {productId} = useParams();
   const [price,setPrice] = useState(0);
   const [name,setName] = useState("");
+  const [auth,setAuth] = useState(false);
+  const [status,setStatus] = useState(true);
   console.log(productId);
   
   const instance = axios.create({
     baseURL:"http://localhost:8080"
   });
+
+  instance.defaults.withCredentials = true;
   
   useEffect(()=>{
     instance.get(`/api/products/${productId}`)
@@ -23,7 +27,22 @@ function ProductViewPage(){
     .catch((error)=>{
         console.log(error);
       })
+  },[]);
+
+  useEffect(()=>{
+    instance.get("/api/auth/authenticate")
+      .then((response)=>{
+        if(response.data.message == "authorize"){
+          setAuth(true)
+        }
+      });
   },[])
+
+  async function buy(){
+    if(auth == false){
+      setStatus(false)
+    }
+  }
   
   return(
     <>
@@ -35,7 +54,8 @@ function ProductViewPage(){
             <h1 className="text-3xl">{name.charAt(0).toUpperCase()+name.slice(1)}</h1>
             <h1 className="text-2xl font-semibold">${price}</h1>
           </div>
-          <button className="bg-cyan-500 text-white h-[5vh] w-full rounded-2xl hover:bg-cyan-600">Buy Now</button>
+          <button className="bg-cyan-500 text-white h-[5vh] w-full rounded-2xl hover:bg-cyan-600" onClick={buy}>Buy Now</button>
+          <div className={`${status?'hidden':'block'}`}>You are not sign in</div>
         </div>
       </main>
     </>
