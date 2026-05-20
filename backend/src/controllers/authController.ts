@@ -6,8 +6,8 @@ import dotenv from "dotenv";
 import db from "../config/mysqlConfig.ts";
 
 dotenv.config();
-//@ts-expect-error
-const secretKey: Secret  = process.env.SECRETKEY;
+
+const secretKey:Secret = process.env.SECRETKEY|| "none";
 
 export async function getUsers(req:Request,res:Response){
     const createUsersTableQuery = `CREATE TABLE IF NOT EXISTS
