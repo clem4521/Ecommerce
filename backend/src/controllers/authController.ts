@@ -4,7 +4,6 @@ import jws from "jsonwebtoken";
 import type { Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
 import db from "../config/mysqlConfig.ts";
-import cookieParser from "cookie-parser";
 
 dotenv.config();
 //@ts-expect-error
@@ -54,7 +53,7 @@ export async function register(req:Request,res:Response){
 }
 
 export async function login(req:Request,res:Response){
-    const loginQuery = "SELECT email,password,first_name FROM users WHERE email = ?";
+    const loginQuery = "SELECT id,email,password,first_name FROM users WHERE email = ?";
     const {email,password} = req.body;
     const cookies = req.cookies;
     const token:string = cookies.token;
@@ -71,10 +70,12 @@ export async function login(req:Request,res:Response){
         //@ts-expect-error
         const name = results[0].first_name;
         //@ts-expect-error
+        const id = results[0].id;
+        //@ts-expect-error
         const userPasswordCrypt = results[0].password;
         const match = await bcrypt.compare(password,userPasswordCrypt);
         if(match){
-            const token:string = jws.sign({email,password,name},secretKey,{expiresIn:"2d"});
+            const token:string = jws.sign({id,email,password,name},secretKey,{expiresIn:"2d"});
             res.cookie("token",token,{
                 httpOnly: true,
                 secure: false,      // true ONLY if using HTTPS
@@ -102,8 +103,8 @@ export function isAuthenticate(req:Request,res:Response){
             return res.json({message:"unauthorized",token:token});
         }else{
             const verify = jws.verify(token,secretKey);
-            console.log(verify);
-            return res.json({message:"authorize"})
+            //console.log(verify);
+            return res.json({message:"authorize",info:verify})
         }
     }catch(error){
         console.log(error)

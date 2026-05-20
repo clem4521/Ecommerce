@@ -18,7 +18,7 @@ function NavBar(){
         if(response.data.message == "authorize"){
           setAuth(true)
         }
-        console.log(response)
+        //console.log(response)
       });
   },[])
 
@@ -44,7 +44,12 @@ function NavBar(){
               <img src={person}/>
               <p></p>
             </div>
-            <img src={shopping_cart} alt="shopping cart"/>
+            <Link to={"/cart"}>
+              <button>
+                <img src={shopping_cart} alt="shopping cart"/>
+              </button>
+            </Link>
+            
             <img src={setting} />
           </div>
         </div>

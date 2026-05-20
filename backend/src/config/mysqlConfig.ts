@@ -11,8 +11,6 @@ const db = await mysql.createConnection({
   password:process.env.PASSWORD,
   database:process.env.DB,
   port:process.env.PORT,
-  enableKeepAlive:true,
-  keepAliveInitialDelay: 10000,
 });
 
 export default db;

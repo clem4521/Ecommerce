@@ -9,7 +9,7 @@ function RegisterPage(){
     let lastNameField = document.getElementById("lastNameField")?.value;
     let emailField = document.getElementById("emailValue")?.value;
     let passwordField = document.getElementById("passwordValue")?.value;
-    console.log(firstNamefield,lastNameField,emailField,passwordField);
+    //console.log(firstNamefield,lastNameField,emailField,passwordField);
     try {
       await instance.post("/api/auth/register",{
         first_name:firstNamefield,
