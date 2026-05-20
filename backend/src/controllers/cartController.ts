@@ -53,6 +53,8 @@ export async function addProductToCart(req:Request,res:Response){
 			createTable();
 			return res.json({"Status Code":200,"Content":"Dasebase was created."});
 		}
+
+		
 	}
 }
 
@@ -78,7 +80,7 @@ async function checkCartExist(db:any,userID:Number,productID:Number){
 async function createTable(){
 	const tableQuery = `CREATE TABLE IF NOT EXISTS 
 	  carts(
-			id INTEGER PREMARY KEY NOT NUll,
+			id INTEGER PRIMARY KEY,
 			productID INTEGER NOT NULL,
             userID INTEGER NOT NULL,
 			amount INTEGER NOT NULl,

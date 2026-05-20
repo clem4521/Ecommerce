@@ -93,6 +93,11 @@ export async function login(req:Request,res:Response){
 
 }
 
+export function logout(req:Request,res:Response){
+    res.clearCookie("token");
+    res.json({message:"You had log out"});
+}
+
 export function isAuthenticate(req:Request,res:Response){
     const cookies = req.cookies;
     const token:string = cookies.token;
@@ -109,10 +114,4 @@ export function isAuthenticate(req:Request,res:Response){
     }catch(error){
         console.log(error)
     }
-    
-}
-
-export function logout(req:Request,res:Response){
-    res.clearCookie("token");
-    res.json({message:"You had log out"});
 }
