@@ -14,6 +14,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(BodyParser.json());
 server.use(BodyParser.urlencoded({extended:true}));
 server.use(cookieParser());
+
 server.use(cors({
   origin:"http://localhost:5173",
   credentials: true,

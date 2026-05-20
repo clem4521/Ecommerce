@@ -9,7 +9,8 @@ function ProductViewPage(){
   const [name,setName] = useState("");
   const [auth,setAuth] = useState(false);
   const [status,setStatus] = useState(true);
-  console.log(productId);
+  const [user,SetUser] = useState(0);
+  //console.log(productId);
   
   const instance = axios.create({
     baseURL:"http://localhost:8080"
@@ -20,7 +21,7 @@ function ProductViewPage(){
   useEffect(()=>{
     instance.get(`/api/products/${productId}`)
       .then(function(response){
-        console.log(response.data.results[0].price);
+        //console.log(response.data.results[0].price);
         setPrice(response.data.results[0].price);
         setName(response.data.results[0].name);
       })
@@ -34,27 +35,38 @@ function ProductViewPage(){
       .then((response)=>{
         if(response.data.message == "authorize"){
           setAuth(true)
+          SetUser(response.data.info.id)
         }
       });
   },[])
 
-  async function buy(){
-    if(auth == false){
-      setStatus(false)
+  const buyProduct = () =>{
+    if(auth){
+        try {
+        instance.post("/api/carts",{
+          userID:`${user}`,
+          productID:`${productId}`
+        }).then((res)=>{
+          console.log(res)
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
+    
   }
   
   return(
     <>
       <NavBar/>
       <main className="relative mt-4">
-        <img src="" alt="image" className="absolute border-2 w-[45vw] h-[60vh] ml-5"/>
+        <img alt="image" className="absolute border-2 w-[45vw] h-[60vh] ml-5"/>
         <div className="absolute right-20 w-[20vw] cursor-default">
           <div className="">
             <h1 className="text-3xl">{name.charAt(0).toUpperCase()+name.slice(1)}</h1>
             <h1 className="text-2xl font-semibold">${price}</h1>
           </div>
-          <button className="bg-cyan-500 text-white h-[5vh] w-full rounded-2xl hover:bg-cyan-600" onClick={buy}>Buy Now</button>
+          <button className="bg-cyan-500 text-white h-[5vh] w-full rounded-2xl hover:bg-cyan-600" onClick={buyProduct}>Buy Now</button>
           <div className={`${status?'hidden':'block'}`}>You are not sign in</div>
         </div>
       </main>

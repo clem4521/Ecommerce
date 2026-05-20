@@ -18,7 +18,7 @@ function NavBar(){
         if(response.data.message == "authorize"){
           setAuth(true)
         }
-        console.log(response)
+        //console.log(response)
       });
   },[])
 
