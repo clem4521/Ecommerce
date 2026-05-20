@@ -6,17 +6,9 @@ const StatusType = {
 } as const;
 type StatusType = (typeof StatusType)[keyof typeof StatusType];
 
-export async function getCarts(req:Request,res:Response){
-    const tableQuery = `CREATE TABLE IF NOT EXISTS 
-	  carts(
-			id INTEGER NOT NUll,
-			productID INTEGER NOT NULL,
-            userID INTEGER NOT NULL,
-			amount INTEGER NOT NULl,
-            status VARCHAR(50) NOT Null
-	  )
-	`;
+/*----Endpoints-----*/
 
+export async function getCarts(req:Request,res:Response){
     const getCartsQuery= "SELECT * FROM carts";
 
     try{
@@ -24,8 +16,8 @@ export async function getCarts(req:Request,res:Response){
 		res.json(results)
 	}catch(error:any){
 	 	if(error.code == 'ER_NO_SUCH_TABLE'){
-			const [results] = await db.query(tableQuery);
-			return res.json();
+			createTable();
+			return res.json({"Status Code":200,"Content":"Dasebase was created."});
 		}
 	}
 }
@@ -41,11 +33,13 @@ export async function addProductToCart(req:Request,res:Response){
 
 	try{
 		const checkCart = await checkCartExist(db,userID,productID);
-		console.log(checkCart);
+		//console.log(checkCart);
 
 		const results = await db.query(CheckUserQuery,[1,productID,userID,1,StatusType.PENDING]);
 		//console.log(results);
+
 		res.json({message:"product was to cart"});
+
 	}catch(error:any){
 		console.log(error);
 		if(error.code == "ER_DUP_ENTRY"){
@@ -54,10 +48,15 @@ export async function addProductToCart(req:Request,res:Response){
 			console.log(results);
 			res.json({message:"product cart was edit"});
 		}
-		
+
+		if(error.code == 'ER_NO_SUCH_TABLE'){
+			createTable();
+			return res.json({"Status Code":200,"Content":"Dasebase was created."});
+		}
 	}
 }
 
+/*---Other functions-----*/
 
 async function addToMoreProduct(db:any,userID:Number,productID :Number){
 	const getCartQuery = "SELECT * FROM carts WHERE userID=? AND productID=? AND status=?";
@@ -65,8 +64,8 @@ async function addToMoreProduct(db:any,userID:Number,productID :Number){
 
 	const amount = results[0].id;
 	const newAmount = amount + 1;
-	return newAmount;
 
+	return newAmount;
 }
 
 async function checkCartExist(db:any,userID:Number,productID:Number){
@@ -74,5 +73,18 @@ async function checkCartExist(db:any,userID:Number,productID:Number){
 	const [results] = await db.query(cartExistQuery,[userID,productID,'pending']);
 
 	return results;
+}
 
+async function createTable(){
+	const tableQuery = `CREATE TABLE IF NOT EXISTS 
+	  carts(
+			id INTEGER PREMARY KEY NOT NUll,
+			productID INTEGER NOT NULL,
+            userID INTEGER NOT NULL,
+			amount INTEGER NOT NULl,
+            status VARCHAR(50) NOT Null
+	  )
+	`;
+
+	const [results] = await db.query(tableQuery);
 }
