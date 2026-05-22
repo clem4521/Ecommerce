@@ -5,14 +5,11 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 import shopping_cart from "../../assets/shopping_cart.svg";
 import person from "../../assets/person.svg";
 import setting from "../../assets/settings.svg";
-
+import instance from "../../../utils/axiosConfig.js";
 
 function NavBar(){
   const [auth, setAuth] = useState(false);
-  const instance = axios.create({
-    baseURL:import.meta.env.VITE_BACKENDURL,
-  });
-  instance.defaults.withCredentials = true;
+  
   useEffect(()=>{
     instance.get("/api/auth/authenticate")
       .then((response)=>{

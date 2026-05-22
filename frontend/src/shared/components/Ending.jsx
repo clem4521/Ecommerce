@@ -5,5 +5,3 @@ export default function Ending(){
         </footer>
     )
 }
-
-//flex-[0_0_50px] bottom-0 w-full bg-black text-white mt-auto

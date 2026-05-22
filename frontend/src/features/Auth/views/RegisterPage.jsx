@@ -1,9 +1,8 @@
 import axios from "axios"
+import instance from "../../../utils/axiosConfig";
 
 function RegisterPage(){
-  const instance = axios.create({
-    baseURL:"http://localhost:8080"
-  });
+  
   async function postNewUser(){
     let firstNamefield = document.getElementById("firstNameValue")?.value;
     let lastNameField = document.getElementById("lastNameField")?.value;

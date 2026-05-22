@@ -3,6 +3,7 @@ import {useParams} from "react-router";
 import axios from "axios";
 import NavBar from "../../../shared/components/NavBar/NavBar.jsx";
 import Ending from "../../../shared/components/Ending.jsx";
+import instance from "../../../utils/axiosConfig.js";
 
 function ProductViewPage(){
   let {productId} = useParams();
@@ -13,11 +14,7 @@ function ProductViewPage(){
   const [user,SetUser] = useState(0);
   //console.log(productId);
   
-  const instance = axios.create({
-    baseURL:"http://localhost:8080"
-  });
-
-  instance.defaults.withCredentials = true;
+  
   
   useEffect(()=>{
     instance.get(`/api/products/${productId}`)
