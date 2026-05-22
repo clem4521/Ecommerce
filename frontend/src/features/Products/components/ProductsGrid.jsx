@@ -18,14 +18,15 @@ function ProductsGrid(){
   },[]);
 
   return (
-    <div className="flex flex-row flex-wrap gap-5 pl-24 mb-10">
-      {products.map((product)=>(
+    <div className="flex flex-row flex-wrap gap-5 pl-24 border">
+      {products==0?(<span className="border absolute left-2 text-[24px]">No Products</span>):
+      (products.map((product)=>(
         <Link to={`/products/${product.id}`}>
           <div className="">
             <ProductContainer name={product.name.charAt(0).toUpperCase()+product.name.slice(1)} price={product.price}/>
           </div>
         </Link>
-      ))}
+      )))}
       
     </div>
   )
