@@ -48,7 +48,9 @@ function NavBar(){
               </button>
             </Link>
             
-            <img src={setting} />
+            <Link to={"/setting"}>
+              <img src={setting} />
+            </Link>
           </div>
         </div>
       </nav>
