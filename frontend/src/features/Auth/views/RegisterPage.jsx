@@ -1,15 +1,14 @@
 import axios from "axios"
+import instance from "../../../utils/axiosConfig";
 
 function RegisterPage(){
-  const instance = axios.create({
-    baseURL:"http://localhost:8080"
-  });
+  
   async function postNewUser(){
     let firstNamefield = document.getElementById("firstNameValue")?.value;
     let lastNameField = document.getElementById("lastNameField")?.value;
     let emailField = document.getElementById("emailValue")?.value;
     let passwordField = document.getElementById("passwordValue")?.value;
-    console.log(firstNamefield,lastNameField,emailField,passwordField);
+    //console.log(firstNamefield,lastNameField,emailField,passwordField);
     try {
       await instance.post("/api/auth/register",{
         first_name:firstNamefield,

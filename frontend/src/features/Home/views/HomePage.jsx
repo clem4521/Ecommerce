@@ -1,14 +1,17 @@
 import NavBar from "../../../shared/components/NavBar/NavBar.jsx";
 import ProductsGrid from "../../Products/components/ProductsGrid.jsx";
+import ending from "../../../shared/components/Ending.jsx";
 import "../../../app/styles/App.css";
+import { Link } from "react-router";
+import Ending from "../../../shared/components/Ending.jsx";
 
 function HomePage(){
   return(
-    <>  
+    <div className="relative flex flex-col min-h-screen">  
       <NavBar/>
       <main className="relative">
         <section>
-          <h2 className="cursor-default">Discounts</h2>
+           <h2 className="cursor-default">Discounts</h2>
         </section>
       
         <section>
@@ -16,8 +19,8 @@ function HomePage(){
           <ProductsGrid/>
         </section>
       </main>
-      <footer className="relative bottom-0 w-full bg-black text-white mt-5">end</footer>
-    </>
+      <Ending/>
+    </div>
   );
 }
 export default HomePage;
