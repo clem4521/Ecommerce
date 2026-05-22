@@ -4,6 +4,7 @@ import LoginPage from "../features/Auth/views/LoginPage.jsx";
 import RegisterPage from "../features/Auth/views/RegisterPage.jsx";
 import ProductViewPage from "../features/Products/views/ProductViewPage.jsx";
 import CartPage from "../features/Cart/Views/CartPage.jsx";
+import SettingPage from "../features/Setting/views/SettingPage.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/products/:productId" element={<ProductViewPage />} />
         <Route path="/cart" element={<CartPage/>}/>
+        <Route path="/setting" element={<SettingPage/>}/>
       </Routes>
     </BrowserRouter>
   );
