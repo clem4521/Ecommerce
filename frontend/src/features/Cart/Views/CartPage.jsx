@@ -1,4 +1,5 @@
 import NavBar from "../../../shared/components/NavBar/NavBar";
+import Ending from "../../../shared/components/Ending";
 
 function CartPage(){
     return(
@@ -7,6 +8,7 @@ function CartPage(){
             <main>
                 
             </main>
+            <Ending/>
         </>
     );
 }

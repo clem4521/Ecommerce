@@ -1,7 +1,9 @@
 import NavBar from "../../../shared/components/NavBar/NavBar.jsx";
 import ProductsGrid from "../../Products/components/ProductsGrid.jsx";
+import ending from "../../../shared/components/Ending.jsx";
 import "../../../app/styles/App.css";
 import { Link } from "react-router";
+import Ending from "../../../shared/components/Ending.jsx";
 
 function HomePage(){
   return(
@@ -17,7 +19,7 @@ function HomePage(){
           <ProductsGrid/>
         </section>
       </main>
-      <footer className="flex-[0_0_50px] bottom-0 w-full bg-black text-white mt-auto">end</footer>
+      <Ending/>
     </div>
   );
 }

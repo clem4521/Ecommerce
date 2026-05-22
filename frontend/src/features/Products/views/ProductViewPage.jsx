@@ -2,6 +2,7 @@ import {useEffect,useState} from "react";
 import {useParams} from "react-router";
 import axios from "axios";
 import NavBar from "../../../shared/components/NavBar/NavBar.jsx";
+import Ending from "../../../shared/components/Ending.jsx";
 
 function ProductViewPage(){
   let {productId} = useParams();
@@ -70,6 +71,7 @@ function ProductViewPage(){
           <div className={`${status?'hidden':'block'}`}>You are not sign in</div>
         </div>
       </main>
+      <Ending/>
     </>
   )
 }
