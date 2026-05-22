@@ -6,10 +6,11 @@ import shopping_cart from "../../assets/shopping_cart.svg";
 import person from "../../assets/person.svg";
 import setting from "../../assets/settings.svg";
 
+
 function NavBar(){
   const [auth, setAuth] = useState(false);
   const instance = axios.create({
-    baseURL:"http://localhost:8080",
+    baseURL:import.meta.env.VITE_BACKENDURL,
   });
   instance.defaults.withCredentials = true;
   useEffect(()=>{

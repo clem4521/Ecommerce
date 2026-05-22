@@ -23,22 +23,25 @@ export async function getCarts(req:Request,res:Response){
 }
 
 export async function addProductToCart(req:Request,res:Response){
-	const CheckUserQuery = `INSERT INTO carts(id,productID,userID,amount,status) Values(?,?,?,?,?)`;
+	const CheckUserQuery = `INSERT INTO carts(productID,userID,amount,status) Values(?,?,?,?)`;
 	const editCartAmountQuery = `
 		INSERT INTO carts(amount)
-		SELECT amount 
 		WHERE userID=? AND productID=? AND status=?`;
 	
 	const {userID,productID} = req.body;
 
 	try{
 		const checkCart = await checkCartExist(db,userID,productID);
+		if(checkCart){
+			const results = await db.query(CheckUserQuery,[productID,userID,1,StatusType.PENDING]);
+			res.json({message:"product was to cart"});
+		}
 		//console.log(checkCart);
 
-		const results = await db.query(CheckUserQuery,[1,productID,userID,1,StatusType.PENDING]);
+		
 		//console.log(results);
 
-		res.json({message:"product was to cart"});
+		
 
 	}catch(error:any){
 		console.log(error);
