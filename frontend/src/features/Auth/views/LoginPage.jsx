@@ -1,12 +1,8 @@
 import {NavLink,useNavigate} from "react-router";
 import axios from "axios";
-
+import instance from "../../../utils/axiosConfig";
 function LoginPage(){
-  let navigate = useNavigate()
-  const instance = axios.create({
-    baseURL:"http://localhost:8080",
-  });
-  instance.defaults.withCredentials = true;
+  let navigate = useNavigate();
 
   async function login(){
     let emailField = document.getElementById("emailValue")?.value;

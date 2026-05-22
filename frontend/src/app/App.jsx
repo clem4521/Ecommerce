@@ -3,6 +3,7 @@ import HomePage from "../features/Home/views/HomePage.jsx";
 import LoginPage from "../features/Auth/views/LoginPage.jsx";
 import RegisterPage from "../features/Auth/views/RegisterPage.jsx";
 import ProductViewPage from "../features/Products/views/ProductViewPage.jsx";
+import CartPage from "../features/Cart/Views/CartPage.jsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/products/:productId" element={<ProductViewPage />} />
+        <Route path="/cart" element={<CartPage/>}/>
       </Routes>
     </BrowserRouter>
   );

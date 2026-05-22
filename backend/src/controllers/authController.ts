@@ -4,11 +4,10 @@ import jws from "jsonwebtoken";
 import type { Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
 import db from "../config/mysqlConfig.ts";
-import cookieParser from "cookie-parser";
 
 dotenv.config();
-//@ts-expect-error
-const secretKey: Secret  = process.env.SECRETKEY;
+
+const secretKey:Secret = process.env.SECRETKEY|| "none";
 
 export async function getUsers(req:Request,res:Response){
     const createUsersTableQuery = `CREATE TABLE IF NOT EXISTS
@@ -54,7 +53,7 @@ export async function register(req:Request,res:Response){
 }
 
 export async function login(req:Request,res:Response){
-    const loginQuery = "SELECT email,password FROM users WHERE email = ?";
+    const loginQuery = "SELECT id,email,password,first_name FROM users WHERE email = ?";
     const {email,password} = req.body;
     const cookies = req.cookies;
     const token:string = cookies.token;
@@ -68,18 +67,21 @@ export async function login(req:Request,res:Response){
     }   
     try{
         const [results] = await db.query(loginQuery,[email]);
-
+        //@ts-expect-error
+        const name = results[0].first_name;
+        //@ts-expect-error
+        const id = results[0].id;
         //@ts-expect-error
         const userPasswordCrypt = results[0].password;
         const match = await bcrypt.compare(password,userPasswordCrypt);
         if(match){
-            const token:string = jws.sign({email,password},secretKey,{expiresIn:"2d"});
+            const token:string = jws.sign({id,email,password,name},secretKey,{expiresIn:"2d"});
             res.cookie("token",token,{
                 httpOnly: true,
                 secure: false,      // true ONLY if using HTTPS
                 sameSite: "lax",
             });
-            return res.status(200).json({message:"successful"});
+            return res.status(200).json({message:"successful",name:name});
         }else{
             return res.json({message:"Password incorrect"});
         }
@@ -91,10 +93,14 @@ export async function login(req:Request,res:Response){
 
 }
 
+export function logout(req:Request,res:Response){
+    res.clearCookie("token");
+    res.json({message:"You had log out"});
+}
+
 export function isAuthenticate(req:Request,res:Response){
     const cookies = req.cookies;
     const token:string = cookies.token;
-    console.log(req.cookies);
     
     try{
         if(token == undefined){
@@ -102,16 +108,10 @@ export function isAuthenticate(req:Request,res:Response){
             return res.json({message:"unauthorized",token:token});
         }else{
             const verify = jws.verify(token,secretKey);
-            console.log(verify);
-            return res.json({message:"authorize"})
+            //console.log(verify);
+            return res.json({message:"authorize",info:verify})
         }
     }catch(error){
         console.log(error)
     }
-    
-}
-
-export function logout(req:Request,res:Response){
-    res.clearCookie("token");
-    res.json({message:"You had log out"});
 }
