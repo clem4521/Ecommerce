@@ -1,15 +1,16 @@
 import NavBar from "../../../shared/components/NavBar/NavBar";
-import Ending from "../../../shared/components/Ending";
+import Footer from "../../../shared/components/Footer";
+import Layout from "../../../shared/components/Layout";
 
 function CartPage(){
     return(
-        <>
+        <div>
             <NavBar/>
-            <main>
-                
+            <main className="w-full h-screen">
+
             </main>
-            <Ending/>
-        </>
+            <Footer/>
+        </div>
     );
 }
 
