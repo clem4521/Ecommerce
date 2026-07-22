@@ -5,7 +5,7 @@ import type { Secret } from "jsonwebtoken";
 import dotenv from "dotenv";
 import db from "../config/mysqlConfig.ts";
 
-dotenv.config();
+dotenv.config({quiet:true});
 
 const secretKey:Secret = process.env.SECRETKEY|| "none";
 
