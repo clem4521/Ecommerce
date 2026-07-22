@@ -12,7 +12,7 @@ function ProductViewPage(){
   const [price,setPrice] = useState(0);
   const [name,setName] = useState("");
   const [auth,setAuth] = useState(false);
-  const [status,setStatus] = useState(true);
+  const [status,setStatus] = useState(false);
   const [user,SetUser] = useState(0);
   //console.log(productId);
   
@@ -52,6 +52,8 @@ function ProductViewPage(){
       } catch (error) {
         console.log(error)
       }
+    }else{
+      setStatus(true)
     }
     
   }
@@ -68,7 +70,7 @@ function ProductViewPage(){
             <h1 className="text-2xl font-semibold">${price}</h1>
           </div>
           <button className="bg-cyan-500 text-white h-[5vh] w-full rounded-2xl hover:bg-cyan-600" onClick={buyProduct}>Buy Now</button>
-          <div className={`${status?'hidden':'block'}`}>You are not sign in</div>
+          <div className={`${status?'block':'hidden'}`}>You are not sign in</div>
         </div>
        
       </main>

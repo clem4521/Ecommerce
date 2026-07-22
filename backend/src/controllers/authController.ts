@@ -104,7 +104,6 @@ export function isAuthenticate(req:Request,res:Response){
     
     try{
         if(token == undefined){
-            console.log("token: ",token);
             return res.json({message:"unauthorized",token:token});
         }else{
             const verify = jws.verify(token,secretKey);

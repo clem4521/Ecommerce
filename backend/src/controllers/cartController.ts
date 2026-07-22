@@ -24,40 +24,26 @@ export async function getCarts(req:Request,res:Response){
 
 export async function addProductToCart(req:Request,res:Response){
 	const CheckUserQuery = `INSERT INTO carts(productID,userID,amount,status) Values(?,?,?,?)`;
-	const editCartAmountQuery = `
-		INSERT INTO carts(amount)
-		WHERE userID=? AND productID=? AND status=?`;
+	const editCartAmountQuery = `UPDATE carts SET amount=? WHERE productID=? AND userID=? AND status=?`;
 	
 	const {userID,productID} = req.body;
 
 	try{
 		const checkCart = await checkCartExist(db,userID,productID);
-		if(checkCart){
+		const amount = checkCart[0][0].amount;
+		console.log(amount)
+		if(checkCart[0].length === 0){
 			const results = await db.query(CheckUserQuery,[productID,userID,1,StatusType.PENDING]);
 			res.json({message:"product was to cart"});
+		}else if(checkCart[0].length > 0){
+			const results = await db.query(editCartAmountQuery,[amount+1,productID,userID,"pending"])
 		}
-		//console.log(checkCart);
-
-		
-		//console.log(results);
-
-		
-
 	}catch(error:any){
 		console.log(error);
-		if(error.code == "ER_DUP_ENTRY"){
-			const amount = await addToMoreProduct(db,userID,productID);
-			const [results] = await db.query(editCartAmountQuery,[amount,userID,productID]);
-			console.log(results);
-			res.json({message:"product cart was edit"});
-		}
-
 		if(error.code == 'ER_NO_SUCH_TABLE'){
 			createTable();
 			return res.json({"Status Code":200,"Content":"Dasebase was created."});
-		}
-
-		
+		}		
 	}
 }
 
@@ -65,7 +51,7 @@ export async function addProductToCart(req:Request,res:Response){
 
 async function addToMoreProduct(db:any,userID:Number,productID :Number){
 	const getCartQuery = "SELECT * FROM carts WHERE userID=? AND productID=? AND status=?";
-	const [results] = await db.query(getCartQuery,[userID,productID,'pending']);
+	const results = await db.query(getCartQuery,[userID,productID,'pending']);
 
 	const amount = results[0].id;
 	const newAmount = amount + 1;
@@ -74,8 +60,8 @@ async function addToMoreProduct(db:any,userID:Number,productID :Number){
 }
 
 async function checkCartExist(db:any,userID:Number,productID:Number){
-	const cartExistQuery = "SELECT * FROM carts WHERE userID=? AND productID=? AND status=?"
-	const [results] = await db.query(cartExistQuery,[userID,productID,'pending']);
+	const cartExistQuery = "SELECT productID,amount,status FROM carts WHERE userID=? AND productID=? AND status=?"
+	const results = await db.query(cartExistQuery,[userID,productID,'pending']);
 
 	return results;
 }
@@ -83,7 +69,7 @@ async function checkCartExist(db:any,userID:Number,productID:Number){
 async function createTable(){
 	const tableQuery = `CREATE TABLE IF NOT EXISTS 
 	  carts(
-			id INTEGER PRIMARY KEY,
+			id INTEGER PRIMARY KEY AUTO_INCREMENT,
 			productID INTEGER NOT NULL,
             userID INTEGER NOT NULL,
 			amount INTEGER NOT NULl,
@@ -91,5 +77,5 @@ async function createTable(){
 	  )
 	`;
 
-	const [results] = await db.query(tableQuery);
+	const results = await db.query(tableQuery);
 }
