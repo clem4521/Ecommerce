@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import { env } from "node:process";
 
-dotenv.config();
+dotenv.config({quiet:true});
 
 //@ts-expect-error
 const db = await mysql.createConnection({
