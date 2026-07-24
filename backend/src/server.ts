@@ -6,6 +6,9 @@ import productRouter from "./routes/productRouter.ts";
 import authRouter from "./routes/authRouter.ts";
 import type { Request,Response } from "express";
 import cartRouter from "./routes/cartRouter.ts";
+import dotenv from "dotenv";
+
+dotenv.config({quiet:true})
 const server = express();
 
 server.use(express.json());
@@ -16,7 +19,7 @@ server.use(BodyParser.urlencoded({extended:true}));
 server.use(cookieParser());
 
 server.use(cors({
-  origin:"http://localhost:5173",
+  origin:process.env.OriginHost,
   credentials: true,
 }));
 
