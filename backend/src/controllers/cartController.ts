@@ -22,6 +22,18 @@ export async function getCarts(req:Request,res:Response){
 	}
 }
 
+export async function getCart(req:Request,res:Response) {
+	const getCartQuery = "Select productID,amount FROM carts WHERE userID=? AND status=?";
+	const userID = req.params.userID;
+	try {
+		const results = await db.query(getCartQuery,[userID,StatusType.PENDING]);
+		res.json({"status_code":200,"info":results[0]});
+	} catch (error) {
+		console.log(error);
+	}
+
+}
+
 export async function addProductToCart(req:Request,res:Response){
 	const CheckUserQuery = `INSERT INTO carts(productID,userID,amount,status) Values(?,?,?,?)`;
 	const editCartAmountQuery = `UPDATE carts SET amount=? WHERE productID=? AND userID=? AND status=?`;
@@ -30,12 +42,12 @@ export async function addProductToCart(req:Request,res:Response){
 
 	try{
 		const checkCart = await checkCartExist(db,userID,productID);
-		const amount = checkCart[0][0].amount;
-		console.log(amount)
+
 		if(checkCart[0].length === 0){
 			const results = await db.query(CheckUserQuery,[productID,userID,1,StatusType.PENDING]);
 			res.json({message:"product was to cart"});
 		}else if(checkCart[0].length > 0){
+			const amount = checkCart[0][0].amount;
 			const results = await db.query(editCartAmountQuery,[amount+1,productID,userID,"pending"])
 		}
 	}catch(error:any){
