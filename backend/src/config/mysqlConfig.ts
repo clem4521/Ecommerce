@@ -4,13 +4,12 @@ import { env } from "node:process";
 
 dotenv.config({quiet:true});
 
-//@ts-expect-error
+
 const db = await mysql.createConnection({
-  host:process.env.HOST,
-  user:process.env.USER,
-  password:process.env.PASSWORD,
-  database:process.env.DB,
-  port:process.env.PORT,
+  host:process.env.HOST!,
+  user:process.env.USER!,
+  password:process.env.PASSWORD!,
+  database:process.env.DB!,
 });
 
 export default db;
