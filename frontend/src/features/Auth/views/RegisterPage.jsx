@@ -2,42 +2,27 @@ import axios from "axios"
 import instance from "../../../utils/axiosConfig";
 
 function RegisterPage(){
-  
   async function postNewUser(){
-    let firstNamefield = document.getElementById("firstNameValue")?.value;
-    let lastNameField = document.getElementById("lastNameField")?.value;
-    let emailField = document.getElementById("emailValue")?.value;
-    let passwordField = document.getElementById("passwordValue")?.value;
-    //console.log(firstNamefield,lastNameField,emailField,passwordField);
-    try {
-      await instance.post("/api/auth/register",{
-        first_name:firstNamefield,
-        last_name:lastNameField,
-        email:emailField,
-        password:passwordField
-      });
-    } catch (error) {
-      console.log(error);
-    }
   }
   
 
   return(
   <main className="flex justify-center items-center">
-    <div className="border-2 border-gray-300 w-[35vw] relative top-10 rounded-2xl">
-      <div className="flex flex-col gap-5 justify-center items-center">
-        <h2 className="text-2xl font-semibold">Register</h2>
-        <div className="flex flex-row gap-3">
-          <input className="border h-[5vh] rounded-2xl pl-2" placeholder="First Name" id="firstNameValue"/>
-          <input className="border h-[5vh] rounded-2xl pl-2" placeholder="Last Name" id="lastNameField"/>
-        </div>
-        <input className="w-[29.5vw] h-[5vh] rounded-2xl pl-2 border" placeholder="Email" id="emailValue"/>
-        <input className="w-[29.5vw] h-[5vh] rounded-2xl pl-2 border" placeholder="Password" type="password" id="passwordValue"/>
-        <div className="">
-          <button className="relative pl-3 bg-gray-200 w-[5vw] h-[5vh] rounded-3xl hover:bg-gray-400 hover:text-white"onClick={postNewUser}>
-            <p className="absolute bottom-1.5 right-2">Sign In</p>
-          </button>
-        </div>
+    <div className="border w-[60vw] h-[40vh] relative top-15 rounded-2xl flex flex-col">
+      <h1 className="text-center font-bold text-[20px]">Login</h1>
+      <span className="text-[12px] ml-2">Enter Your infomation</span>
+      <div className="pl-2 flex flex-col gap-2 mt-2">
+        <input placeholder="First Name" className="outline-1 rounded-[4px] pl-1 w-[55vw]"/>
+        <input placeholder="Last Name" className="outline-1 rounded-[4px] pl-1 w-[55vw]"/>
+      </div>
+
+      <div className="pl-2 flex flex-col gap-2 mt-6">
+        <input placeholder="Email" className="outline-1 rounded-[4px] pl-1 w-[55vw]"/>
+        <input placeholder="Password" className="outline-1 rounded-[4px] pl-1 w-[55vw]"/>
+      </div>
+     
+      <div className=" justify-center mt-4">
+         <button className="  bg-gray-400 text-white font-bold hover:bg-gray-200 ml-[34%] w-[20vw] border rounded-[4px]">SignIn</button>
       </div>
     </div>
   </main>
